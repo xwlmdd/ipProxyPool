@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdd.pip.mapper.ProxyIpMapper">
+	<resultMap id="BaseResultMap" type="com.mdd.pip.model.ProxyIp">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="proxy_ip" jdbcType="VARCHAR" property="proxyIp" />
+		<result column="proxy_port" jdbcType="INTEGER" property="proxyPort" />
+		<result column="anonymity" jdbcType="VARCHAR" property="anonymity" />
+		<result column="proxy_type" jdbcType="VARCHAR" property="proxyType" />
+		<result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+		<result column="response_speed" jdbcType="VARCHAR" property="responseSpeed" />
+		<result column="alive_time" jdbcType="VARCHAR" property="aliveTime" />
+		<result column="insert_time" jdbcType="DATE" property="insertTime" />
+		<result column="update_time" jdbcType="DATE" property="updateTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, proxy_ip, proxy_port, anonymity, proxy_type, ip_address,
+		response_speed, alive_time,
+		insert_time, update_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_proxy_ip
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_proxy_ip
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="saveProxyIpList" parameterType="java.util.List">
+		insert into t_proxy_ip (id, proxy_ip, proxy_port,
+		anonymity, proxy_type, ip_address,
+		response_speed, alive_time, insert_time,
+		update_time)
+		values
+		<foreach collection="list" item="proxyIp" index="index"
+			separator=",">
+			(#{proxyIp.id,jdbcType=INTEGER}, #{proxyIp.proxyIp,jdbcType=VARCHAR}, #{proxyIp.proxyPort,jdbcType=INTEGER},
+			#{proxyIp.anonymity,jdbcType=VARCHAR}, #{proxyIp.proxyType,jdbcType=VARCHAR},
+			#{proxyIp.ipAddress,jdbcType=VARCHAR},
+			#{proxyIp.responseSpeed,jdbcType=VARCHAR}, #{proxyIp.aliveTime,jdbcType=VARCHAR}, now(),
+			now())
+		</foreach>
+	</insert>
+
+	<insert id="insert" parameterType="com.mdd.pip.model.ProxyIp">
+		insert into t_proxy_ip (id, proxy_ip, proxy_port,
+		anonymity, proxy_type, ip_address,
+		response_speed, alive_time, insert_time,
+		update_time)
+		values (#{id,jdbcType=INTEGER}, #{proxyIp,jdbcType=VARCHAR},
+		#{proxyPort,jdbcType=INTEGER},
+		#{anonymity,jdbcType=VARCHAR}, #{proxyType,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR},
+		#{responseSpeed,jdbcType=VARCHAR}, #{aliveTime,jdbcType=VARCHAR},
+		#{insertTime,jdbcType=DATE},
+		#{updateTime,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.mdd.pip.model.ProxyIp">
+		insert into t_proxy_ip
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="proxyIp != null">
+				proxy_ip,
+			</if>
+			<if test="proxyPort != null">
+				proxy_port,
+			</if>
+			<if test="anonymity != null">
+				anonymity,
+			</if>
+			<if test="proxyType != null">
+				proxy_type,
+			</if>
+			<if test="ipAddress != null">
+				ip_address,
+			</if>
+			<if test="responseSpeed != null">
+				response_speed,
+			</if>
+			<if test="aliveTime != null">
+				alive_time,
+			</if>
+			<if test="insertTime != null">
+				insert_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="proxyIp != null">
+				#{proxyIp,jdbcType=VARCHAR},
+			</if>
+			<if test="proxyPort != null">
+				#{proxyPort,jdbcType=INTEGER},
+			</if>
+			<if test="anonymity != null">
+				#{anonymity,jdbcType=VARCHAR},
+			</if>
+			<if test="proxyType != null">
+				#{proxyType,jdbcType=VARCHAR},
+			</if>
+			<if test="ipAddress != null">
+				#{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="responseSpeed != null">
+				#{responseSpeed,jdbcType=VARCHAR},
+			</if>
+			<if test="aliveTime != null">
+				#{aliveTime,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				#{insertTime,jdbcType=DATE},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.mdd.pip.model.ProxyIp">
+		update t_proxy_ip
+		<set>
+			<if test="proxyIp != null">
+				proxy_ip = #{proxyIp,jdbcType=VARCHAR},
+			</if>
+			<if test="proxyPort != null">
+				proxy_port = #{proxyPort,jdbcType=INTEGER},
+			</if>
+			<if test="anonymity != null">
+				anonymity = #{anonymity,jdbcType=VARCHAR},
+			</if>
+			<if test="proxyType != null">
+				proxy_type = #{proxyType,jdbcType=VARCHAR},
+			</if>
+			<if test="ipAddress != null">
+				ip_address = #{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="responseSpeed != null">
+				response_speed = #{responseSpeed,jdbcType=VARCHAR},
+			</if>
+			<if test="aliveTime != null">
+				alive_time = #{aliveTime,jdbcType=VARCHAR},
+			</if>
+			<if test="insertTime != null">
+				insert_time = #{insertTime,jdbcType=DATE},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=DATE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.mdd.pip.model.ProxyIp">
+		update t_proxy_ip
+		set proxy_ip = #{proxyIp,jdbcType=VARCHAR},
+		proxy_port = #{proxyPort,jdbcType=INTEGER},
+		anonymity = #{anonymity,jdbcType=VARCHAR},
+		proxy_type = #{proxyType,jdbcType=VARCHAR},
+		ip_address = #{ipAddress,jdbcType=VARCHAR},
+		response_speed = #{responseSpeed,jdbcType=VARCHAR},
+		alive_time = #{aliveTime,jdbcType=VARCHAR},
+		insert_time = #{insertTime,jdbcType=DATE},
+		update_time = #{updateTime,jdbcType=DATE}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+</mapper>
