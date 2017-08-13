@@ -1,4 +1,4 @@
-package com.mdd.proxyip;
+package com.mdd.proxyip.model;
 
 /**
  * 代理ip匿名度

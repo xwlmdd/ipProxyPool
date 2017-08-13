@@ -1,6 +1,8 @@
 package com.mdd.proxyip.crawler;
 
-import com.mdd.proxyip.ProxyIp;
+import com.mdd.proxyip.model.ProxyIp;
+import com.mdd.proxyip.pipeLine.DataPipeLine;
+import com.mdd.proxyip.redis.RedisCache;
 import com.mdd.proxyip.utils.CommonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -24,7 +26,7 @@ import java.util.List;
  */
 @Component
 public class QuanWanProxyIpCrawler implements PageProcessor {
-	
+
 	private Logger logger = Logger.getLogger(QuanWanProxyIpCrawler.class);
 
 	// 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
@@ -48,7 +50,6 @@ public class QuanWanProxyIpCrawler implements PageProcessor {
 				// ip地址
 				proxyIp.setProxyIp(ip.substring(0, ip.indexOf(":")));
 				// 端口号
-				System.out.println("---------"+ip);
 				proxyIp.setProxyPort(Integer.parseInt(ip.substring(ip.indexOf(":") + 1, ip.length())));
 				analyzeProxyIp(trHtml, proxyIp);
 				proxyIpList.add(proxyIp);

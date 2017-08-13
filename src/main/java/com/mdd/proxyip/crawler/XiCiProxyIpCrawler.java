@@ -3,7 +3,7 @@ package com.mdd.proxyip.crawler;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mdd.proxyip.ProxyIp;
+import com.mdd.proxyip.model.ProxyIp;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

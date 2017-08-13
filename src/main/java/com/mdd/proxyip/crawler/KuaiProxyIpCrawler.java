@@ -1,6 +1,6 @@
 package com.mdd.proxyip.crawler;
 
-import com.mdd.proxyip.ProxyIp;
+import com.mdd.proxyip.model.ProxyIp;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;

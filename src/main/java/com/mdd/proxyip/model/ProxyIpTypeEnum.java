@@ -1,4 +1,4 @@
-package com.mdd.proxyip;
+package com.mdd.proxyip.model;
 
 public enum ProxyIpTypeEnum {
 	HTTP(1,"HTTP"),

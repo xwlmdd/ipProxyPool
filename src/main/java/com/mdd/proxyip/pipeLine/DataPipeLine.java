@@ -1,6 +1,6 @@
 package com.mdd.proxyip.pipeLine;
 
-import com.mdd.proxyip.ProxyIp;
+import com.mdd.proxyip.model.ProxyIp;
 import com.mdd.proxyip.service.ProxyIpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

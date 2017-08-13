@@ -1,9 +1,10 @@
 package com.mdd.proxyip.mapper;
 
-import com.mdd.proxyip.ProxyIp;
+import com.mdd.proxyip.model.ProxyIp;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
+@Mapper
 public interface ProxyIpMapper {
     int deleteByPrimaryKey(Integer id);
 

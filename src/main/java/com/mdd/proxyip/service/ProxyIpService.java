@@ -1,9 +1,9 @@
 package com.mdd.proxyip.service;
 
-import com.mdd.proxyip.mapper.ProxyIpMapper;
-import com.mdd.proxyip.ProxyIp;
+import com.mdd.proxyip.model.ProxyIp;
 import com.mdd.proxyip.redis.RedisCache;
 import com.mdd.proxyip.utils.CheckIPUtils;
+import com.mdd.proxyip.mapper.ProxyIpMapper;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

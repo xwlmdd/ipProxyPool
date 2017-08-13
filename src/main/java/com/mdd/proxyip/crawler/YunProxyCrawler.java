@@ -5,11 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import us.codecraft.webmagic.Page;
-import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.utils.HttpConstant;
+
 /**
  * 云代理网站ip抓取
  * 
