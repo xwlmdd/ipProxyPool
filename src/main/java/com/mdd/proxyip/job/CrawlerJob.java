@@ -1,4 +1,4 @@
-package com.mdd.proxyip.Job;
+package com.mdd.proxyip.job;
 
 import com.mdd.proxyip.crawler.KuaiProxyIpCrawler;
 import com.mdd.proxyip.crawler.QuanWanProxyIpCrawler;
@@ -7,8 +7,6 @@ import com.mdd.proxyip.pipeLine.DataPipeLine;
 import com.mdd.proxyip.redis.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisSentinelPool;
 import us.codecraft.webmagic.Spider;
 
 /**

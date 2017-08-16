@@ -14,7 +14,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * 
  * @author xwl 2017.6.3
  */
-public class YunProxyCrawler implements PageProcessor {
+public class MiPuProxyCrawler implements PageProcessor {
 
 	// 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
 	private Site site = Site.me().setCycleRetryTimes(3)
@@ -28,9 +28,6 @@ public class YunProxyCrawler implements PageProcessor {
 			.addHeader("Connection", "keep-alive")
 			.addHeader("Upgrade-Insecure-Requests", "1")
 			.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
-//			.addCookie("UM_distinctid=1", "5c7db8069170-05e20c35a51c048-46524130-100200-15c7db806af1f9")
-//			.addCookie("safedog-flow-item", "01582A2F6D7F69AE7CA124F779C399B8")
-//			.addCookie("CNZZDATA1256284042", "2131148624-1496757874-%7C1496757874")
 			;
 	public Site getSite() {
 		
@@ -49,8 +46,9 @@ public class YunProxyCrawler implements PageProcessor {
 	}
 
 	public static void main(String[] args) {
-		Spider.create(new YunProxyCrawler()).addUrl("http://www.ip3366.net/?stype=1&page=6").thread(1).run();
-//		http://api.share.baidu.com/s.gif?l=http://www.ip3366.net/?stype=1&page=8
+		Spider.create(new MiPuProxyCrawler()).addUrl("http://www.ip3366.net/?stype=1&page=6").thread(1).run();
 	}
+
+
 
 }

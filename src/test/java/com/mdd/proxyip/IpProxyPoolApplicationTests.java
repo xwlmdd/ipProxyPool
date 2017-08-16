@@ -1,6 +1,6 @@
 package com.mdd.proxyip;
 
-import com.mdd.proxyip.Job.CrawlerJob;
+import com.mdd.proxyip.job.CrawlerJob;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
