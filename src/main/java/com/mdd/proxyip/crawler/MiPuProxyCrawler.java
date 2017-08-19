@@ -1,9 +1,17 @@
 package com.mdd.proxyip.crawler;
 
+import com.mdd.proxyip.login.MiPuCrawlerLogin;
 import com.mdd.proxyip.utils.CommonUtils;
+import com.mdd.proxyip.utils.HttpClientUtils;
+import com.mdd.proxyip.utils.HttpRequestData;
 import org.apache.commons.lang3.StringUtils;
 
 
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.cookie.Cookie;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -15,38 +23,41 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * @author xwl 2017.6.3
  */
 public class MiPuProxyCrawler implements PageProcessor {
+    private Logger logger = Logger.getLogger(MiPuProxyCrawler.class);
 
+//    @Autowired
+    private MiPuCrawlerLogin miPuCrawlerLogin = new MiPuCrawlerLogin();
 	// 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
-	private Site site = Site.me().setCycleRetryTimes(3)
-			.setRetryTimes(3)
-			.setSleepTime(1000)
-			.setDomain("www.ip3366.net")
-			.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0")
-			.addHeader("Referer", "http://www.ip3366.net/")
-			.addHeader("Accept-Encoding", "gzip, deflate")
-			.addHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3")
-			.addHeader("Connection", "keep-alive")
-			.addHeader("Upgrade-Insecure-Requests", "1")
-			.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
-			;
+	private Site site = initSite();
+
+    private Site initSite(){
+        Site site = Site.me();
+        HttpResponse httpResponse = miPuCrawlerLogin.login();
+        if (httpResponse.getStatusLine().getStatusCode()!=200){
+            logger.error("米扑代理登录失败！");
+            return null;
+        }
+        for (Cookie cookie : HttpClientUtils.cookieStore.getCookies()) {
+            site.addCookie(cookie.getName(),cookie.getValue());
+        }
+        site.setCycleRetryTimes(3).setRetryTimes(3).setSleepTime(1000);
+        return site;
+    }
+
+
 	public Site getSite() {
-		
-		return site;
+        return site;
 	}
 
 	public void process(Page page) {
-		
-		String html = page.getHtml().get();
+        System.out.println("------------"+page.getStatusCode());
+        String html = page.getHtml().get();
 		System.out.println(html);
-		String nextPage = CommonUtils.simpleMatch(html,"<a href=\"(.*?)\">下一页</a>");
-		System.out.println(nextPage);
-		if(StringUtils.isNotBlank(nextPage)){
-			page.addTargetRequest(nextPage);
-		}
 	}
 
 	public static void main(String[] args) {
-		Spider.create(new MiPuProxyCrawler()).addUrl("http://www.ip3366.net/?stype=1&page=6").thread(1).run();
+        Spider spider = Spider.create(new MiPuProxyCrawler());
+        spider.addUrl("http://proxy.mimvp.com/free.php?proxy=in_tp&sort=&page=1").thread(1).run();
 	}
 
 
