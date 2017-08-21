@@ -11,6 +11,8 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.cookie.Cookie;
 import org.apache.log4j.Logger;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -50,10 +52,11 @@ public class MiPuProxyCrawler implements PageProcessor {
 	}
 
 	public void process(Page page) {
-        System.out.println("------------"+page.getStatusCode());
         String html = page.getHtml().get();
-		System.out.println(html);
-	}
+        Document doucment = Jsoup.parse("#list > table > tbody > tr:nth-child(1)");
+
+
+    }
 
 	public static void main(String[] args) {
         Spider spider = Spider.create(new MiPuProxyCrawler());

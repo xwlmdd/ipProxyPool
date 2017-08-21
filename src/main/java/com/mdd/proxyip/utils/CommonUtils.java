@@ -1,7 +1,9 @@
 package com.mdd.proxyip.utils;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Administrator on 2016/12/25.
+ * Created by XWL on 2016/12/25.
  */
 public class CommonUtils {
 	public static String simpleMatch(String text, String regex) {
@@ -120,4 +122,10 @@ public class CommonUtils {
 		}
 		return 0;
 	}
+
+	public static String streamToString(InputStream inputStream){
+
+		return "";
+	}
+
 }

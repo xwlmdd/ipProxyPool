@@ -45,28 +45,6 @@ public class MiPuCrawlerLogin {
         httpRequestData.setParams(paramsMap);
         httpRequestData.setRequestUrl(LOGIN_URL);
         HttpResponse httpResponse = HttpClientUtils.execute(httpRequestData);
-        List<Cookie> cookies = HttpClientUtils.cookieStore.getCookies();
-        for (Cookie c:cookies){
-            System.out.println(c.getName()+"---"+c.getValue());
-        }
-//        HttpClientUtils.httpClient.
-//        System.out.println(httpResponse.getStatusLine().getStatusCode());
-////        System.out.println(httpResponse);
-//        HttpRequestData hd = new HttpRequestData();
-//        hd.setRequestMethod("get");
-//        hd.setRequestUrl("http://proxy.mimvp.com/api/fetch.php?orderid=1072552712@qq.com&num=20&result_fields=1,2");
-//        HttpResponse e = HttpClientUtils.execute(hd);
-//        try {
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(
-//                    e.getEntity().getContent()));
-//            String content = "";
-//            for(String s = reader.readLine(); s != null; s = reader.readLine()){
-//                content += s;
-//            }
-//            System.out.println(content);
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
         return httpResponse;
     }
 
