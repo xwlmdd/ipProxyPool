@@ -97,7 +97,6 @@ public class MiPuProxyCrawler implements PageProcessor {
             proxyIpList.add(proxyIp);
         }
         page.putField("proxyIpList", proxyIpList);
-
     }
 
     public static void main(String[] args) {

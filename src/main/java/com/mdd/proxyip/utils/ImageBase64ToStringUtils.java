@@ -12,26 +12,27 @@ import java.io.InputStream;
  */
 public class ImageBase64ToStringUtils {
 
-    public static String imageToStringByBase64(String url) throws IOException {
+    public static String imageToStringByBase64(String url) {
         String imageString = "";
         HttpRequestData httpRequestData = new HttpRequestData();
         httpRequestData.setRequestUrl(url);
         httpRequestData.setRequestMethod("get");
         HttpResponse response = HttpClientUtils.execute(httpRequestData);
-        if (response.getStatusLine().getStatusCode()==200){
-            InputStream inputStream = response.getEntity().getContent();
-            byte[] bytes = IOUtils.toByteArray(inputStream);
-            BASE64Encoder base64Encoder = new BASE64Encoder();
-            imageString = base64Encoder.encode(bytes);
+        if (response.getStatusLine().getStatusCode() == 200) {
+            InputStream inputStream = null;
+            try {
+                inputStream = response.getEntity().getContent();
+                byte[] bytes = IOUtils.toByteArray(inputStream);
+                imageString = Base64Util.encode(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//            BASE64Encoder base64Encoder = new BASE64Encoder();
         }
         return imageString;
     }
 
     public static void main(String[] args) {
-        try {
-            System.out.println(imageToStringByBase64("http://jwgl.jxau.edu.cn/User/Validation/"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(imageToStringByBase64("http://jwgl.jxau.edu.cn/User/Validation/"));
     }
 }

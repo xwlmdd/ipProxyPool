@@ -3,7 +3,7 @@ package com.mdd.proxyip.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ProxyIp implements Serializable{
+public class ProxyIp implements Serializable {
     private Integer id;
 
     private String proxyIp;
@@ -102,5 +102,21 @@ public class ProxyIp implements Serializable{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ProxyIp{" +
+                "id=" + id +
+                ", proxyIp='" + proxyIp + '\'' +
+                ", proxyPort=" + proxyPort +
+                ", anonymity='" + anonymity + '\'' +
+                ", proxyType='" + proxyType + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", responseSpeed='" + responseSpeed + '\'' +
+                ", aliveTime='" + aliveTime + '\'' +
+                ", insertTime=" + insertTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

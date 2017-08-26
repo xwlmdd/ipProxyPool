@@ -6,10 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.log4j.Logger;
-import sun.misc.BASE64Encoder;
-
 import java.io.*;
-import java.net.URLEncoder;
 import java.util.HashMap;
 
 /**
@@ -17,10 +14,11 @@ import java.util.HashMap;
  */
 public class VCodeCheckUtils {
 
-    private static Logger logger = Logger.getLogger(VCodeCheckUtils.class);
+    private static final Logger logger = Logger.getLogger(VCodeCheckUtils.class);
 
-    private static String OCRUrl = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic";
+    private static  String OCRUrl = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic";
 //    private static String OCRUrl = "https://aip.baidubce.com/rest/2.0/ocr/v1/webimage";
+    private static final  String ACCESS_TOKEN =  getAccessToken();
 
     /**
      * 获取AccessToken
@@ -64,18 +62,18 @@ public class VCodeCheckUtils {
      */
     public static String OCRVCode(String imageUrl){
         String VCode = "";
-        String accessToken = getAccessToken();
-        if (StringUtils.isBlank(accessToken)) {
+
+        if (StringUtils.isBlank(ACCESS_TOKEN)) {
             logger.error("accessToken为空");
             return VCode;
         }
-        OCRUrl = OCRUrl + "?access_token=" + accessToken;
+        OCRUrl = OCRUrl + "?access_token=" + ACCESS_TOKEN;
 
         HashMap<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/x-www-form-urlencoded");
 
         HashMap<String, String> params = new HashMap<>();
-        imageUrl = encodeImgageToBase64(imageUrl);
+        imageUrl = ImageBase64ToStringUtils.imageToStringByBase64(imageUrl);
         params.put("image", imageUrl);
 
         HttpRequestData httpRequestData = new HttpRequestData();
@@ -101,12 +99,10 @@ public class VCodeCheckUtils {
 
     /**
      * 将本地图片进行Base64位编码
-     *
      * @param imageFile
-     *            图片的url路径，如d:\\中文.jpg
      * @return
      */
-    public static String encodeImgageToBase64(String imageFile) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+    public static String encodeImgageToBase64(String imageFile) {
         // 其进行Base64编码处理
         byte[] data = null;
         // 读取图片字节数组
@@ -120,12 +116,13 @@ public class VCodeCheckUtils {
         }
 
         // 对字节数组Base64编码
-        BASE64Encoder encoder = new BASE64Encoder();
-        return encoder.encode(data);// 返回Base64编码过的字节数组字符串
+//        BASE64Encoder encoder = new BASE64Encoder();
+        return Base64Util.encode(data);
     }
 
     public static void main(String[] args) throws IOException {
 //        System.out.println(getAccessToken());
-        System.out.println(OCRVCode("g:/xxx.jpg"));
+//        System.out.println(OCRVCode("G:ygrandimg.png"));
+        System.out.println(OCRVCode("http://proxy.mimvp.com/common/ygrandimg.php?id=7&port=NmTiAmzvMpTI4"));
     }
 }

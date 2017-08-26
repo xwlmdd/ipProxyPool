@@ -32,13 +32,15 @@ public class HttpClientUtils {
 
     public static CookieStore cookieStore;
 
-    static {
-        cookieStore  = new BasicCookieStore();
-        // 将CookieStore设置到httpClient中
-        httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
-    }
+//    static {
+//        cookieStore  = new BasicCookieStore();
+//        // 将CookieStore设置到httpClient中
+//        httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
+//    }
 
     public static HttpResponse execute(HttpRequestData httpRequestData) {
+        cookieStore  = new BasicCookieStore();
+        httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
         HttpResponse httpResponse = null;
         //请求方式
         String requestMethod = httpRequestData.getRequestMethod();
@@ -73,6 +75,7 @@ public class HttpClientUtils {
             } catch (IOException e) {
                 logger.error("请求失败！", e);
             }
+
 
         }
         return httpResponse;
