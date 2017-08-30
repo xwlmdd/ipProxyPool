@@ -21,17 +21,17 @@ public class IpProxyPoolApplicationTests {
 
     @Test
     public void testQuanWanSaveProxyIpList() {
-        crawlerJob.testQuanWanSaveProxyIpList();
+        crawlerJob.quanWanProxyIpCrawlerJob();
     }
 
     @Test
     public void testXiCiSaveProxyIpList() {
-        crawlerJob.testXiCiSaveProxyIpList();
+        crawlerJob.xiCiProxyIpCrawlerJob();
     }
 
     @Test
     public void testKuaiSaveProxyIpList() {
-       crawlerJob.testKuaiSaveProxyIpList();
+       crawlerJob.kuaiProxyIpCrawlerJob();
     }
 
 
