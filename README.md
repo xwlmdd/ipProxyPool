@@ -3,6 +3,7 @@
 
 环境搭建
 该项目采用maven统一构建，首先创建一个maven项目，在pom.xml文件中以下依赖
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -129,9 +130,10 @@ public class Application {
         SpringApplication.run(Application.class, args);
    }
 }
+```
 关键代码如下
 使用webmagic获取ip代理详情（全网代理ip分散在不同标签【找规律解析出来】|| 米扑代理ip端口是图片【采用百度orc】）
-
+```
 /**
  * 云代理网站ip抓取
  * @author xwl 2017.6.3
@@ -375,6 +377,7 @@ public class VCodeCheckUtils {
         System.out.println(OCRVCode("http://proxy.mimvp.com/common/ygrandimg.php?id=7&port=NmTiAmzvMpTI4"));
     }
 }
+```
 运行如下（存储在redis）
 
 
